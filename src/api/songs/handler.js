@@ -68,7 +68,7 @@ class SongsHandler {
 
     async deleteSongByIdHandler(request, h) {
         const { id } = request.params;
-        console.log('id', id);
+
         await this._service.deleteSongById(id);
         return h
             .response({

@@ -101,7 +101,6 @@ class SongsService {
             values: [id],
         };
         const result = await this._pool.query(query);
-        console.log('hasil query', result);
 
         if (!result.rows.length) {
             throw new NotFoundError('Gagal menghapus lagu');
