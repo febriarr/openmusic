@@ -10,14 +10,14 @@ exports.shorthands = undefined;
  */
 exports.up = (pgm) => {
     pgm.addColumns('albums', {
-        createdAt: {
-            type: 'timestamp',
-            default: pgm.func('current_timestamp'),
+        created_at: {
+            type: 'TIMESTAMP',
+            default: pgm.func('CURRENT_TIMESTAMP'),
             notNull: true,
         },
-        updatedAt: {
-            type: 'timestamp',
-            default: pgm.func('current_timestamp'),
+        updated_at: {
+            type: 'TIMESTAMP',
+            default: pgm.func('CURRENT_TIMESTAMP'),
             notNull: true,
         },
     });
@@ -29,5 +29,5 @@ exports.up = (pgm) => {
  * @returns {Promise<void> | void}
  */
 exports.down = (pgm) => {
-    pgm.dropColumns('albums', ['createdAt', 'updatedAt']);
+    pgm.dropColumns('albums', ['created_at', 'updated_at']);
 };
