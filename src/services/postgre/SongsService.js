@@ -21,7 +21,7 @@ class SongsService {
         const createdAt = new Date().toISOString();
 
         const query = {
-            text: 'INSERT INTO songs VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
+            text: 'INSERT INTO songs (id, title, year, performer, genre, duration, album_id, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
             values: [
                 id,
                 title,
@@ -46,7 +46,7 @@ class SongsService {
     async getSongs(title = '', performer = '') {
         const query = {
             text: 'SELECT id, title, performer FROM songs WHERE title ILIKE $1 AND performer ILIKE $2',
-            values: [`%${title}`, `%${performer}`],
+            values: [`%${title}%`, `%${performer}%`],
         };
 
         const result = await this._pool.query(query);
@@ -101,6 +101,7 @@ class SongsService {
             values: [id],
         };
         const result = await this._pool.query(query);
+        console.log('hasil query', result);
 
         if (!result.rows.length) {
             throw new NotFoundError('Gagal menghapus lagu');

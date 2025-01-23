@@ -29,7 +29,7 @@ class SongsHandler {
     }
 
     async getSongsHandler(request) {
-        const { title, performer } = request.query;
+        const { title = '', performer = '' } = request.query;
         const songs = await this._service.getSongs(title, performer);
 
         return {
@@ -68,6 +68,7 @@ class SongsHandler {
 
     async deleteSongByIdHandler(request, h) {
         const { id } = request.params;
+        console.log('id', id);
         await this._service.deleteSongById(id);
         return h
             .response({
